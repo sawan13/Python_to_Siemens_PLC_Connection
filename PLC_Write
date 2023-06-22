@@ -1,0 +1,35 @@
+import snap7
+
+def write_plc_tag(plc_ip, rack, slot, tag, value):
+    try:
+        # Create a Snap7 client object
+        client = snap7.client.Client()
+
+        # Connect to the PLC
+        client.connect(plc_ip, rack, slot)
+
+        # Convert the value to the appropriate data type
+        data = snap7.util.set_real(value)  # Example conversion for a real (float) value
+
+        # Write the value to the tag
+        result = client.write_area(snap7.types.AreaDB, 1, 0, data)  # Example write operation
+
+        # Disconnect from the PLC
+        client.disconnect()
+
+        if result == 0:
+            print("Tag value written successfully")
+        else:
+            print("Failed to write tag value")
+    except Exception as e:
+        print("Failed to write tag:", e)
+
+# Replace '192.168.0.1' with the IP address of your PLC
+plc_ip = '192.168.0.1'
+rack = 0  # Rack number of the PLC
+slot = 1  # Slot number of the PLC
+tag_name = 'YourTagName'  # Replace with the actual tag name you want to write
+value_to_write = 123.45  # Replace with the value you want to write to the tag
+
+# Write the value to the tag
+write_plc_tag(plc_ip, rack, slot, tag_name, value_to_write)

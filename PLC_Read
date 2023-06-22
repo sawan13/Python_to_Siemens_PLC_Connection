@@ -1,0 +1,34 @@
+import snap7
+
+def read_plc_tag(plc_ip, rack, slot, tag):
+    try:
+        # Create a Snap7 client object
+        client = snap7.client.Client()
+
+        # Connect to the PLC
+        client.connect(plc_ip, rack, slot)
+
+        # Read the value of the tag
+        result = client.read_area(snap7.types.AreaDB, 1, 0, 1)  # Example read operation
+
+        # Disconnect from the PLC
+        client.disconnect()
+
+        # Convert the result to the desired data type
+        value = snap7.util.get_real(result, 0)  # Example conversion for a real (float) value
+
+        return value
+    except Exception as e:
+        print("Failed to read tag:", e)
+
+# Replace '192.168.0.1' with the IP address of your PLC
+plc_ip = '192.168.0.1'
+rack = 0  # Rack number of the PLC
+slot = 1  # Slot number of the PLC
+tag_name = 'YourTagName'  # Replace with the actual tag name you want to read
+
+# Read the value of the tag
+tag_value = read_plc_tag(plc_ip, rack, slot, tag_name)
+
+# Print the tag value
+print("Tag value:", tag_value)

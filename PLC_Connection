@@ -1,0 +1,23 @@
+import snap7
+
+def check_plc_connection(plc_ip):
+    try:
+        # Create a Snap7 client object
+        client = snap7.client.Client()
+
+        # Attempt to connect to the PLC
+        client.connect(plc_ip, 0, 1)
+
+        # If the above line is reached, the connection is successful
+        print("PLC connection is active")
+
+        # Disconnect from the PLC
+        client.disconnect()
+    except Exception as e:
+        # If an exception occurs, the connection is not successful
+        print("PLC connection is inactive")
+        print("Error:", e)
+
+# Replace '192.168.0.1' with the IP address of your Siemens PLC
+plc_ip = '192.168.0.1'
+check_plc_connection(plc_ip)
