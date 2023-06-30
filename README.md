@@ -5,3 +5,4 @@ Let’s assume that Python and pip are already installed on your PC.
 
 Let’s install the library. 
 
+$pip install python-snap7
