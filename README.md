@@ -5,7 +5,10 @@ Let’s assume that Python and pip are already installed on your PC.
 
 Let’s install the library. 
 
-$ pip install python-snap7
+```
+ pip install python-snap7
+```
+$
 
 For example, the PLC in the machine has an IP address: 192.168.0.1
 
